@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Întrebări istorie clasa a VI-a</title>
+    <style>
+        /* CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-image: url('images/background1.jpg'); /* Calea către imaginea de fundal */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8); /* O ușoară transparență pentru vizibilitate mai bună a textului */
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        #question-box {
+            margin: 20px 0;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Întrebări istorie clasa a V-a</h1>
+        <div id="question-box">
+            <p id="question"></p>
+        </div>
+        <button id="next-btn" onclick="nextQuestion()">Începe testul</button>
+    </div>
+
+    <script>
+        // JavaScript
+        const questions = [
+            "În ce an se destramă Imperiul roman de Apus?", 
+            "Ce stat a apărut în locul fostului Imperiu roman de Apus?", 
+            "Cine a fost conducătorul Imperiului carolingian și de ce se numea așa?", 
+            "Ce state se desprind din Imperiul carolingian?", 
+            "Ce dinastie se impune în regatul Franței și cum s-a numit primul său reprezentant?", 
+            "Prin ce s-a făcut remarcat Hugo Capet?", 
+            "Ce dinastie a înființat Otto I și unde?", 
+            "Explică următorii termeni: dinastie, monarh, amerindian", 
+            "Care sunt cauzele marilor descoperiri geografice?", 
+            "Ce invenții ale europenilor au stat la baza marilor descoperiri geografice?", 
+            "Ce popoare europene au inițiat marile descoperiri geografice?", 
+            "Descrie descoperirea sudului Africii.", 
+            "Descrie expediția descoperirii drumului maritim spre India.", 
+            "Descrie călătoriile lui Cristofor Columb.", 
+            "De unde provine numele America?", 
+            "Cine realizează primul înconjur al lumii și între ce ani a fost realizat?", 
+            "Descrie călătoria lui Fernando Magelan.", 
+            "Ce popoare descoperă europenii în America?", 
+            "Ce denumiri a primit inițial America și de ce?", 
+            "Cum erau amerindienii din punct de vedere tehnologic?", 
+            "Care au fost urmările marilor descoperiri geografice?", 
+            "Explică următorii termeni: caravelă, portulan, astrolab, misionarism.", 
+            "Ce alte popoare au continuat marile descoperiri geografice?", 
+            "Cine a creat primul mare drum comercial, când și cum s-a numit?", 
+            "Cum se numea exploratorul arab din sec. XIV?", 
+            "Ce dinastie se impune la începuturile Angliei și cum s-a numit războiul care a dus la stingerea acestei dinastii?"
+        ];
+
+        let currentIndex = 0;
+        let currentRound = [];
+        let roundsCompleted = 0;
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function startNewRound() {
+            currentIndex = 0;
+            currentRound = shuffleArray([...questions]).slice(0, 10);
+            document.getElementById('question').textContent = "";
+            document.getElementById('next-btn').textContent = "Următoarea întrebare";
+            document.getElementById('next-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentIndex >= 10) {
+                document.getElementById('question').textContent = "Ai terminat setul de 10 întrebări!";
+                document.getElementById('next-btn').textContent = "Începe testul";
+                document.getElementById('next-btn').disabled = true;
+
+                setTimeout(() => {
+                    startNewRound();
+                }, 3000);
+                return;
+            }
+
+            document.getElementById('question').textContent = currentRound[currentIndex];
+            currentIndex++;
+
+            if (currentIndex < 10) {
+                document.getElementById('next-btn').textContent = "Următoarea întrebare";
+            }
+        }
+
+        startNewRound();
+    </script>
+</body>
+</html>
+
